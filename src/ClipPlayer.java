@@ -42,7 +42,7 @@ public class ClipPlayer {
 						format.getChannels(),
 						format.getFrameSize()*2,
 						format.getFrameRate(),
-						true);        
+						true);
 				stream = AudioSystem.getAudioInputStream(format, stream);
 			}
 

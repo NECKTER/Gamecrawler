@@ -11,7 +11,7 @@ public class Frame extends JFrame implements ActionListener {
 	Panel panel;
 
 	public Frame() {
-		super("Name");
+		super("Neon Shivam");
 		setLayout(new BorderLayout());
 		createMenus();
 		setResizable(false);
