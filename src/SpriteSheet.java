@@ -10,7 +10,7 @@ public class SpriteSheet {
 	public SpriteSheet() {
 		try {
 			main = ImageIO.read(SpriteSheet.class.getResourceAsStream("angry_birds.png"));
-			main.
+		//	main.
 		} catch (IOException e) {
 		}
 	}
