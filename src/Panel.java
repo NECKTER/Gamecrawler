@@ -68,8 +68,6 @@ public class Panel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// do stuff and then repaint
-		//repaint();
-		System.out.println(item.getName());
-		item.randomName();
+		repaint();
 	}
 }
