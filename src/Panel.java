@@ -12,7 +12,7 @@ public class Panel extends JPanel implements ActionListener {
 	private Timer gameTimer;
 	private ClipPlayer sound = new ClipPlayer();
 	private SpriteSheet sheet = new SpriteSheet();
-	private Items item = new Items(0, 0, 0, 0, null, "main");
+	//private Items item = new Items(0, 0, 0, 0, null, "main");
 
 	public Panel() {
 		this.setPreferredSize(new Dimension(800, 450));
@@ -56,6 +56,7 @@ public class Panel extends JPanel implements ActionListener {
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
+		g.drawImage(sheet.getMap(), 0, 0, null);
 		//paint what is to be seen then the game has not yet started or has ended
 		if (!gameTimer.isRunning()) {
 
