@@ -9,8 +9,7 @@ public class SpriteSheet {
 
 	public SpriteSheet() {
 		try {
-			main = ImageIO.read(SpriteSheet.class.getResourceAsStream("angry_birds.png"));
-		//	main.
+			main = ImageIO.read(SpriteSheet.class.getResourceAsStream("images/angry_birds.png"));
 		} catch (IOException e) {
 		}
 	}
