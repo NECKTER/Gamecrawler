@@ -14,7 +14,7 @@ public class Frame extends JFrame implements ActionListener {
 		super("Neon Shivam");
 		setLayout(new BorderLayout());
 		createMenus();
-		setResizable(true);
+		setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		panel = new Panel();
 		this.add(panel);

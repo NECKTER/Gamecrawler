@@ -7,6 +7,8 @@ import javax.imageio.ImageIO;
 
 public class MapSheet {
 	private BufferedImage map01;
+	private int xholder = 0, yholder= 0 ;
+	private boolean ispressureX = false, ispressureY = false;
 	
 
 	public MapSheet() {
@@ -17,8 +19,25 @@ public class MapSheet {
 		}
 	}
 	
-		public void drawmap(int playerX, int playerY, Graphics g, int screenwidth, int screenhieght ){
-			g.drawImage(map01, 0, 0, 1600, 1600, null);
+		public void drawmap(int playerX, int playerY, Graphics g, int screenwidth, int screenheight ){
+			g.drawImage(map01, xholder, yholder, 1600, 900, null);
 		}
+		public boolean moveleft(int playermoveX){
+			if( xholder > 1200 || xholder < 0 ){
+				return true;
+			}else{
+				xholder = xholder + playermoveX + xholder;
+			}
+			return ispressureX;
+		}
+		public boolean moveup(int playermoveY){
+			if( xholder > 1200 || xholder < 0 ){
+				return true;
+			}else{
+				xholder = yholder - playermoveY + yholder;
+			}
+			return ispressureY;
+		}
+		
 	
 }

@@ -58,6 +58,7 @@ public class Panel extends JPanel implements ActionListener {
 	public void paint(Graphics g) {
 		super.paint(g);
 		map.drawmap(0, 0, g, this.getWidth(), this.getHeight());
+		map.moveleft(100);
 		//paint what is to be seen then the game has not yet started or has ended
 		if (!gameTimer.isRunning()) {
 
@@ -70,6 +71,7 @@ public class Panel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// do stuff and then repaint
+
 		repaint();
 		//System.out.println(item.getName());
 		//item.randomName();
