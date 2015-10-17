@@ -12,9 +12,10 @@ public class Panel extends JPanel implements ActionListener {
 	private Timer gameTimer;
 	private ClipPlayer sound = new ClipPlayer();
 	private SpriteSheet sheet = new SpriteSheet();
+	private Items item = new Items(0, 0, 0, 0, null, "main");
 
 	public Panel() {
-		this.setPreferredSize(new Dimension(1600, 900));
+		this.setPreferredSize(new Dimension(800, 450));
 		gameTimer = new Timer(1, this);
 		setUpBindings();
 	}
@@ -67,6 +68,8 @@ public class Panel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// do stuff and then repaint
-		repaint();
+		//repaint();
+		System.out.println(item.getName());
+		item.randomName();
 	}
 }
