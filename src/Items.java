@@ -10,8 +10,8 @@ public class Items extends Objects {
 	private Map<String, Integer> Stats = new HashMap<String, Integer>();
 	private String type = "";
 	private String name = "";
-	private File nouns = new File(Items.class.getResource("text/ItemNames").getFile());
-	private File adjectives = new File(Items.class.getResource("text/ItemAdjectives").getFile());
+	private static File nouns = new File(Items.class.getResource("text/ItemNames").getFile());
+	private static File adjectives = new File(Items.class.getResource("text/ItemAdjectives").getFile());
 	private static ArrayList<String> nounlist = new ArrayList<>();
 	private static ArrayList<String> adjlist = new ArrayList<>();
 	private Scanner scanner;
