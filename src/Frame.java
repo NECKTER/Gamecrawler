@@ -1,6 +1,11 @@
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -14,12 +19,41 @@ public class Frame extends JFrame implements ActionListener {
 		super("Neon Shivam");
 		setLayout(new BorderLayout());
 		createMenus();
-		setResizable(false);
+		setResizable(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		panel = new Panel();
 		this.add(panel);
 		pack();
 		this.setVisible(true);
+		addComponentListener(new ComponentListener() {
+
+			@Override
+			public void componentShown(ComponentEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void componentResized(ComponentEvent e) {
+
+//				System.out.println(e.getComponent().getHeight());
+//				System.out.println(e.getComponent().getWidth());
+				panel.resize(new Dimension(e.getComponent().getWidth(), e.getComponent().getHeight()));
+
+			}
+
+			@Override
+			public void componentMoved(ComponentEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void componentHidden(ComponentEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
 	}
 
 	private void createMenus() {
