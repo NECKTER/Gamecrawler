@@ -91,4 +91,31 @@ public class Objects {
 	public Rectangle getRect() {
 		return myrect;
 	}
+	
+	
+//	
+//	
+//	New Setter methods used to change in locations for all objects
+//	cuz it sucks adding these in on every stupid class
+//	aka codeing 101 kiddiot (not sponsored by wizard 101)
+//	
+//	
+	
+	
+	public int addY(int addY){
+		this.y = addY + this.y;
+		return this.y;
+	}
+public int addX(int addX){
+		x = addX + x;
+		return x;
+	}
+public int SetX(int newX){
+	x = newX;
+	return x;
+}
+public int Sety(int newY){
+	y = newY;
+	return y;
+}
 }
