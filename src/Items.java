@@ -33,7 +33,7 @@ public class Items extends Objects {
 	private void scan() {
 		try {
 			scanner = new Scanner(nouns);
-			System.out.println("noun file found");
+//			System.out.println("noun file found");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			System.out.println("nouns does not esist");
@@ -43,7 +43,7 @@ public class Items extends Objects {
 		}
 		try {
 			scanner = new Scanner(adjectives);
-			System.out.println("adjectives file found");
+//			System.out.println("adjectives file found");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			System.out.println("adjectives does not esist");

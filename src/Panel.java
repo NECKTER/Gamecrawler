@@ -16,7 +16,7 @@ public class Panel extends JPanel implements ActionListener {
 	private MapSheet map = new MapSheet();
 	private ArrayList<Character> pressedKeys = new ArrayList<>();
 
-	//private Items item = new Items(0, 0, 0, 0, null, "main");
+	private Items item = new Items(0, 0, 0, 0, null, "test");
 
 	public Panel() {
 		this.setPreferredSize(new Dimension(1600, 900));
@@ -44,8 +44,9 @@ public class Panel extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(!pressedKeys.contains(new Character(' ')))pressedKeys.add(new Character(' '));
-				System.out.println(pressedKeys);
+				if (!pressedKeys.contains(new Character(' '))) pressedKeys.add(new Character(' '));
+				System.out.println(item.getName());
+				item.randomName();
 			}
 		});
 		this.getActionMap().put("shootOff", new AbstractAction() {
@@ -57,7 +58,6 @@ public class Panel extends JPanel implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (pressedKeys.contains(new Character(' '))) pressedKeys.remove(new Character(' '));
-				System.out.println(pressedKeys);
 			}
 		});
 		this.getActionMap().put("Up", new AbstractAction() {
@@ -68,8 +68,7 @@ public class Panel extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(!pressedKeys.contains(new Character('W')))pressedKeys.add(new Character('W'));
-				System.out.println(pressedKeys);
+				if (!pressedKeys.contains(new Character('W'))) pressedKeys.add(new Character('W'));
 			}
 		});
 		this.getActionMap().put("UpOff", new AbstractAction() {
@@ -81,7 +80,6 @@ public class Panel extends JPanel implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (pressedKeys.contains(new Character('W'))) pressedKeys.remove(new Character('W'));
-				System.out.println(pressedKeys);
 			}
 		});
 		this.getActionMap().put("Left", new AbstractAction() {
@@ -92,8 +90,7 @@ public class Panel extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(!pressedKeys.contains(new Character('A')))pressedKeys.add(new Character('A'));
-				System.out.println(pressedKeys);
+				if (!pressedKeys.contains(new Character('A'))) pressedKeys.add(new Character('A'));
 			}
 		});
 		this.getActionMap().put("LeftOff", new AbstractAction() {
@@ -105,7 +102,6 @@ public class Panel extends JPanel implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (pressedKeys.contains(new Character('A'))) pressedKeys.remove(new Character('A'));
-				System.out.println(pressedKeys);
 			}
 		});
 		this.getActionMap().put("Down", new AbstractAction() {
@@ -116,8 +112,7 @@ public class Panel extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(!pressedKeys.contains(new Character('S')))pressedKeys.add(new Character('S'));
-				System.out.println(pressedKeys);
+				if (!pressedKeys.contains(new Character('S'))) pressedKeys.add(new Character('S'));
 			}
 		});
 		this.getActionMap().put("DownOff", new AbstractAction() {
@@ -129,7 +124,6 @@ public class Panel extends JPanel implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (pressedKeys.contains(new Character('S'))) pressedKeys.remove(new Character('S'));
-				System.out.println(pressedKeys);
 			}
 		});
 		this.getActionMap().put("Right", new AbstractAction() {
@@ -140,8 +134,7 @@ public class Panel extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(!pressedKeys.contains(new Character('D')))pressedKeys.add(new Character('D'));
-				System.out.println(pressedKeys);
+				if (!pressedKeys.contains(new Character('D'))) pressedKeys.add(new Character('D'));
 			}
 		});
 		this.getActionMap().put("RightOff", new AbstractAction() {
@@ -153,7 +146,6 @@ public class Panel extends JPanel implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (pressedKeys.contains(new Character('D'))) pressedKeys.remove(new Character('D'));
-				System.out.println(pressedKeys);
 			}
 		});
 	}
@@ -180,11 +172,8 @@ public class Panel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// do stuff and then repaint
-
 		update();
 		repaint();
-		//System.out.println(item.getName());
-		//item.randomName();
 	}
 
 	private void update() {
