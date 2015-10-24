@@ -6,18 +6,60 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class SpriteSheet {
-	private BufferedImage main;
-	private BufferedImage player;
-	
-
+	private BufferedImage page1;
+	private BufferedImage page2;
+	private BufferedImage page3;
+	private BufferedImage soldier1;
+	private BufferedImage wormstraight;
+	private BufferedImage wormmoving;
+	private BufferedImage soldier2;
+	private BufferedImage squidrest;
+	private BufferedImage squidprecum;
+	private BufferedImage squidcumming;
+	private BufferedImage robot;
+	private BufferedImage soldier3;
 	public SpriteSheet() {
 		try {
-			main = ImageIO.read(SpriteSheet.class.getResourceAsStream("images/angry_birds.png"));
-			player = ImageIO.read(SpriteSheet.class.getResourceAsStream("images/Shivum.png"));
+			page1 = ImageIO.read(SpriteSheet.class.getResourceAsStream("images/Page 0.jpg"));
+			page2 = ImageIO.read(SpriteSheet.class.getResourceAsStream("images/Page 1.jpg"));
+			page3 = ImageIO.read(SpriteSheet.class.getResourceAsStream("images/Page 2.jpg"));
 		} catch (IOException e) {
 		}
+		soldier1= page1.getSubimage(172, 139,175 ,218);
+		wormstraight= page1.getSubimage(225, 535,235 ,93);
+		wormmoving=page1.getSubimage(237, 700,234,93);
+		soldier2=page1.getSubimage(616, 504, 257,189);
+		squidrest=page2.getSubimage(560, 75, 170, 120);
+		squidprecum=page2.getSubimage(514, 257, 217, 101);
+		squidcumming=page2.getSubimage(437, 433, 296, 93);
+		robot=page2.getSubimage(376, 886, 118,167 );
+		soldier3=page2.getSubimage(629, 872, 181, 142);
 	}
-	public BufferedImage getImg(){
-		return player;
+	public BufferedImage getSoldier1(){
+		return soldier1;
+	}
+	public BufferedImage wormStraight(){
+		return wormstraight;
+	}
+	public BufferedImage wormMoving(){
+		return wormmoving;
+	}
+	public BufferedImage getSoldier2(){
+		return soldier2;
+	}
+	public BufferedImage getsquidRest(){
+		return squidrest;
+	}
+	public BufferedImage getsquidPrecum(){
+		return squidprecum;
+	}
+	public BufferedImage getsquidCumming(){
+		return squidcumming;
+	}
+	public BufferedImage robot(){
+		return robot;
+	}
+	public BufferedImage getSoldier3(){
+		return soldier3;
 	}
 }
