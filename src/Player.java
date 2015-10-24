@@ -90,4 +90,5 @@ public class Player extends Objects {
 	public int getRe(){
 		return moverequest;
 	}
+	
 }

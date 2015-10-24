@@ -27,7 +27,7 @@ public class MapSheet {
 			ispressureX = true;
 			return true;
 		} else {
-			xholder = xholder + playermoveX ;
+			xholder = xholder + playermoveX;
 		}
 		ispressureX = false;
 		return ispressureX;
@@ -38,16 +38,17 @@ public class MapSheet {
 			ispressureY = true;
 			return true;
 		} else {
-			System.out.println(playermoveY);
-			yholder = yholder + playermoveY ;
+			yholder = yholder + playermoveY;
 		}
 		ispressureY = false;
 		return ispressureY;
 	}
-public int getholderX(){
-	return xholder;
-}
-public int getholderY(){
-	return yholder;
-}
+
+	public int getholderX() {
+		return xholder;
+	}
+
+	public int getholderY() {
+		return yholder;
+	}
 }

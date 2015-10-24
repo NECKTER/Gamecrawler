@@ -91,8 +91,7 @@ public class Objects {
 	public Rectangle getRect() {
 		return myrect;
 	}
-	
-	
+
 //	
 //	
 //	New Setter methods used to change in locations for all objects
@@ -100,22 +99,40 @@ public class Objects {
 //	aka codeing 101 kiddiot (not sponsored by wizard 101)
 //	
 //	
-	
-	
-	public int addY(int addY){
+
+	public int addY(int addY) {
 		this.y = addY + this.y;
 		return this.y;
 	}
-public int addX(int addX){
+
+	public int addX(int addX) {
 		x = addX + x;
 		return x;
 	}
-public int SetX(int newX){
-	x = newX;
-	return x;
-}
-public int Sety(int newY){
-	y = newY;
-	return y;
-}
+
+	public int SetX(int newX) {
+		x = newX;
+		return x;
+	}
+
+	public int Sety(int newY) {
+		y = newY;
+		return y;
+	}
+
+	public void setH(int h) {
+		this.h = h;
+	}
+
+	public void setW(int w) {
+		this.w = w;
+	}
+
+	public int getH() {
+		return h;
+	}
+
+	public int getW() {
+		return w;
+	}
 }

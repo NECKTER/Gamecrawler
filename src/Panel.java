@@ -139,11 +139,7 @@ public class Panel extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
-			
-				right();
-=======
->>>>>>> origin/master
+
 				if (!pressedKeys.contains(new Character('D'))) pressedKeys.add(new Character('D'));
 			}
 		});
@@ -222,13 +218,7 @@ public class Panel extends JPanel implements ActionListener {
 
 	private void left() {
 		// TODO Auto-generated method stub
-<<<<<<< HEAD
-map.moveleft(1);
-
-=======
 		map.moveleft(1);
-		System.out.println(map.getholderX());
->>>>>>> origin/master
 	}
 
 	private void up() {
@@ -249,7 +239,7 @@ map.moveleft(1);
 		// TODO Auto-generated method stub
 		player.setH((int) ((getHeight() / 900.0) * playerImage.getHeight()));
 		player.setW((int) ((getWidth() / 1600.0) * playerImage.getWidth()));
-		System.out.println(player.getH() + " " + player.getW());
+//		System.out.println(player.getH() + " " + player.getW());
 		player.move(getWidth() / 2 - player.getW() / 2, getHeight() / 2 - player.getH() / 2);
 	}
 }
