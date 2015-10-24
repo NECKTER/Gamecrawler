@@ -1,7 +1,9 @@
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import javax.swing.AbstractAction;
@@ -15,8 +17,10 @@ public class Panel extends JPanel implements ActionListener {
 	private SpriteSheet sheet = new SpriteSheet();
 	private MapSheet map = new MapSheet();
 	private ArrayList<Character> pressedKeys = new ArrayList<>();
+	private BufferedImage playerImage = sheet.getSoldier1();
+	private Player player = new Player((this.getWidth() / 2) - (playerImage.getWidth() / 2), (this.getHeight() / 2) - (playerImage.getHeight() / 2), playerImage.getHeight(), playerImage.getWidth(), playerImage, 10, 1);
 
-	//private Items item = new Items(0, 0, 0, 0, null, "test");
+//	private Items item = new Items(0, 0, 0, 0, null, "test");
 
 	public Panel() {
 		this.setPreferredSize(new Dimension(1600, 900));
@@ -45,8 +49,8 @@ public class Panel extends JPanel implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (!pressedKeys.contains(new Character(' '))) pressedKeys.add(new Character(' '));
-			//	System.out.println(item.getName());
-			//	item.randomName();
+//				System.out.println(item.getName());
+//				item.randomName();
 			}
 		});
 		this.getActionMap().put("shootOff", new AbstractAction() {
@@ -68,7 +72,6 @@ public class Panel extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				up();
 				if (!pressedKeys.contains(new Character('W'))) pressedKeys.add(new Character('W'));
 			}
 		});
@@ -91,7 +94,6 @@ public class Panel extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				left();
 				if (!pressedKeys.contains(new Character('A'))) pressedKeys.add(new Character('A'));
 			}
 		});
@@ -103,7 +105,6 @@ public class Panel extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				left();
 				if (pressedKeys.contains(new Character('A'))) pressedKeys.remove(new Character('A'));
 			}
 		});
@@ -115,7 +116,6 @@ public class Panel extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				down();
 				if (!pressedKeys.contains(new Character('S'))) pressedKeys.add(new Character('S'));
 			}
 		});
@@ -127,7 +127,7 @@ public class Panel extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			
+
 				if (pressedKeys.contains(new Character('S'))) pressedKeys.remove(new Character('S'));
 			}
 		});
@@ -139,8 +139,11 @@ public class Panel extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD
 			
 				right();
+=======
+>>>>>>> origin/master
 				if (!pressedKeys.contains(new Character('D'))) pressedKeys.add(new Character('D'));
 			}
 		});
@@ -160,17 +163,19 @@ public class Panel extends JPanel implements ActionListener {
 	public void startGame() {
 		// setup game then start timer
 		gameTimer.start();
+		centerPlayer();
 	}
 
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
-		map.drawmap(0, 0, g, this.getWidth(), this.getHeight());
 //		map.moveleft(100);
 		//paint what is to be seen then the game has not yet started or has ended
 		if (!gameTimer.isRunning()) {
 			return;
 		}
+		map.drawmap(0, 0, g, this.getWidth(), this.getHeight());
+		player.draw(g);
 		//paint game stuff
 
 	}
@@ -205,26 +210,30 @@ public class Panel extends JPanel implements ActionListener {
 
 	private void right() {
 		// TODO Auto-generated method stub
-map.moveleft(-1);
+		map.moveleft(-1);
 
 	}
 
 	private void down() {
 		// TODO Auto-generated method stub
-map.moveup(-1);
+		map.moveup(-1);
 
 	}
 
 	private void left() {
 		// TODO Auto-generated method stub
+<<<<<<< HEAD
 map.moveleft(1);
 
+=======
+		map.moveleft(1);
+		System.out.println(map.getholderX());
+>>>>>>> origin/master
 	}
 
 	private void up() {
 		// TODO Auto-generated method stub
-map.moveup(1);
-
+		map.moveup(1);
 
 	}
 
@@ -233,5 +242,14 @@ map.moveup(1);
 		// TODO Auto-generated method stub
 		setPreferredSize(d);
 		repaint();
+		centerPlayer();
+	}
+
+	private void centerPlayer() {
+		// TODO Auto-generated method stub
+		player.setH((int) ((getHeight() / 900.0) * playerImage.getHeight()));
+		player.setW((int) ((getWidth() / 1600.0) * playerImage.getWidth()));
+		System.out.println(player.getH() + " " + player.getW());
+		player.move(getWidth() / 2 - player.getW() / 2, getHeight() / 2 - player.getH() / 2);
 	}
 }
