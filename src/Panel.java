@@ -139,7 +139,7 @@ public class Panel extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("dfdf");
+			
 				right();
 				if (!pressedKeys.contains(new Character('D'))) pressedKeys.add(new Character('D'));
 			}
@@ -218,7 +218,7 @@ map.moveup(-1);
 	private void left() {
 		// TODO Auto-generated method stub
 map.moveleft(1);
-System.out.println(map.getholderX());
+
 	}
 
 	private void up() {
