@@ -19,7 +19,7 @@ public class MapSheet {
 	}
 
 	public void drawmap(int playerX, int playerY, Graphics g, int screenwidth, int screenheight) {
-		g.drawImage(map01, xholder, yholder, screenwidth, screenheight, null);
+		g.drawImage(map01, xholder, yholder, map01.getWidth(), map01.getHeight(), null);
 	}
 
 	public boolean moveleft(int playermoveX) {
