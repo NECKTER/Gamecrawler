@@ -162,7 +162,6 @@ public class Panel extends JPanel implements ActionListener {
 //		map.moveleft(100);
 		//paint what is to be seen then the game has not yet started or has ended
 		if (!gameTimer.isRunning()) {
-
 			return;
 		}
 		//paint game stuff
@@ -178,6 +177,43 @@ public class Panel extends JPanel implements ActionListener {
 
 	private void update() {
 		// TODO Auto-generated method stub
+		moveStuff();
+	}
+
+	private void moveStuff() {
+		// TODO Auto-generated method stub
+		if (pressedKeys.contains(new Character('W')) && pressedKeys.contains(new Character('S'))) {
+			pressedKeys.remove(new Character('W'));
+			pressedKeys.remove(new Character('S'));
+		}
+		if (pressedKeys.contains(new Character('A')) && pressedKeys.contains(new Character('D'))) {
+			pressedKeys.remove(new Character('A'));
+			pressedKeys.remove(new Character('D'));
+		}
+		if (pressedKeys.contains(new Character('W'))) up();
+		if (pressedKeys.contains(new Character('A'))) left();
+		if (pressedKeys.contains(new Character('S'))) down();
+		if (pressedKeys.contains(new Character('D'))) right();
+	}
+
+	private void right() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void down() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void left() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void up() {
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
