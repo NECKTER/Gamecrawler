@@ -16,7 +16,7 @@ public class Panel extends JPanel implements ActionListener {
 	private MapSheet map = new MapSheet();
 	private ArrayList<Character> pressedKeys = new ArrayList<>();
 
-	private Items item = new Items(0, 0, 0, 0, null, "test");
+	//private Items item = new Items(0, 0, 0, 0, null, "test");
 
 	public Panel() {
 		this.setPreferredSize(new Dimension(1600, 900));
@@ -45,8 +45,8 @@ public class Panel extends JPanel implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (!pressedKeys.contains(new Character(' '))) pressedKeys.add(new Character(' '));
-				System.out.println(item.getName());
-				item.randomName();
+			//	System.out.println(item.getName());
+			//	item.randomName();
 			}
 		});
 		this.getActionMap().put("shootOff", new AbstractAction() {
@@ -68,6 +68,7 @@ public class Panel extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				up();
 				if (!pressedKeys.contains(new Character('W'))) pressedKeys.add(new Character('W'));
 			}
 		});
@@ -90,6 +91,7 @@ public class Panel extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				left();
 				if (!pressedKeys.contains(new Character('A'))) pressedKeys.add(new Character('A'));
 			}
 		});
@@ -101,6 +103,7 @@ public class Panel extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				left();
 				if (pressedKeys.contains(new Character('A'))) pressedKeys.remove(new Character('A'));
 			}
 		});
@@ -112,6 +115,7 @@ public class Panel extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				down();
 				if (!pressedKeys.contains(new Character('S'))) pressedKeys.add(new Character('S'));
 			}
 		});
@@ -123,6 +127,7 @@ public class Panel extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+			
 				if (pressedKeys.contains(new Character('S'))) pressedKeys.remove(new Character('S'));
 			}
 		});
@@ -134,6 +139,8 @@ public class Panel extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				System.out.println("dfdf");
+				right();
 				if (!pressedKeys.contains(new Character('D'))) pressedKeys.add(new Character('D'));
 			}
 		});
@@ -198,21 +205,26 @@ public class Panel extends JPanel implements ActionListener {
 
 	private void right() {
 		// TODO Auto-generated method stub
+map.moveleft(-1);
 
 	}
 
 	private void down() {
 		// TODO Auto-generated method stub
+map.moveup(-1);
 
 	}
 
 	private void left() {
 		// TODO Auto-generated method stub
-
+map.moveleft(1);
+System.out.println(map.getholderX());
 	}
 
 	private void up() {
 		// TODO Auto-generated method stub
+map.moveup(1);
+
 
 	}
 
