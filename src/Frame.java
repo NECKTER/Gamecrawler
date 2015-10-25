@@ -1,9 +1,12 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -25,6 +28,20 @@ public class Frame extends JFrame implements ActionListener {
 		this.add(panel);
 		pack();
 		this.setVisible(true);
+		addMouseMotionListener(new MouseMotionListener() {
+
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				// TODO Auto-generated method stub
+				panel.rotatePlayer();
+			}
+
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				// TODO Auto-generated method stub
+				panel.rotatePlayer();
+			}
+		});
 		addComponentListener(new ComponentListener() {
 
 			@Override

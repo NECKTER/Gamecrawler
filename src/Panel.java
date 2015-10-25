@@ -1,6 +1,7 @@
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -16,6 +17,7 @@ public class Panel extends JPanel implements ActionListener {
 	private ClipPlayer sound = new ClipPlayer();
 	private SpriteSheet sheet = new SpriteSheet();
 	private MapSheet map = new MapSheet();
+	private Point center = new Point(0, 0);
 	private ArrayList<Character> pressedKeys = new ArrayList<>();
 	private BufferedImage playerImage = sheet.getSoldier1();
 	private Player player = new Player((this.getWidth() / 2) - (playerImage.getWidth() / 2), (this.getHeight() / 2) - (playerImage.getHeight() / 2), playerImage.getHeight(), playerImage.getWidth(), playerImage, 10, 1);
@@ -235,11 +237,23 @@ public class Panel extends JPanel implements ActionListener {
 		centerPlayer();
 	}
 
+	public void rotatePlayer() {
+		// TODO Auto-generated method stub
+		if (getMousePosition() != null) {
+			double x = getMousePosition().getX() - center.getX();
+			double y = getMousePosition().getY() - center.getY();
+			double angle = Math.toDegrees(Math.atan(y / x));
+			if (x < 0) angle += 180;
+			player.setRotation(angle);
+		}
+	}
+
 	private void centerPlayer() {
 		// TODO Auto-generated method stub
-		player.setH((int) ((getHeight() / 900.0) * playerImage.getHeight()));
-		player.setW((int) ((getWidth() / 1600.0) * playerImage.getWidth()));
+		player.setH(((getHeight() / 900.0)));
+		player.setW(((getWidth() / 1600.0)));
 //		System.out.println(player.getH() + " " + player.getW());
-		player.move(getWidth() / 2 - player.getW() / 2, getHeight() / 2 - player.getH() / 2);
+		center.setLocation(getWidth() / 2 - player.getW() / 2, getHeight() / 2 - player.getH() / 2);
+		player.move(center.getX(), center.getY());
 	}
 }
