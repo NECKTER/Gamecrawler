@@ -1,6 +1,9 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Objects {
 	public static Panel panel;
@@ -12,6 +15,7 @@ public class Objects {
 	private int animation = 0;
 	private boolean changeImg = true;
 	private boolean destroyed = false;
+	private static ArrayList<Integer> backroundColors = new ArrayList<>();
 
 	public Objects(int x, int y, int h, int w, Image img) {
 		this.h = h;
@@ -20,6 +24,19 @@ public class Objects {
 		this.x = x;
 		this.y = y;
 		this.myrect = new Rectangle(x - w / 3, y, w * 2, h);
+		populateBackroundColors();
+	}
+
+	private void populateBackroundColors() {
+		// TODO Auto-generated method stub
+		int x = 5;
+		for (int i = 0; i < x; i++) {
+			for (int j = 0; j < x; j++) {
+				for (int j2 = 0; j2 < x; j2++) {
+					backroundColors.add(new Integer(new Color(i, 255 - j2, j).getRGB()));
+				}
+			}
+		}
 	}
 
 	public void addImage(Image img) {
@@ -39,7 +56,15 @@ public class Objects {
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
 		if (!destroyed) {
-			g.drawImage(getImage(), x, y, w, h, panel);
+			BufferedImage img = (BufferedImage) getImage();
+			for (int i = 0; i < img.getHeight(); i++) {
+				for (int j = 0; j < img.getWidth(); j++) {
+					if (!(backroundColors.contains(new Integer(img.getRGB(j, i))))) {
+						g.setColor(new Color(img.getRGB(j, i)));
+						g.drawLine(x + j, y + i, x + j, y + i);
+					}
+				}
+			}
 		}
 	}
 
