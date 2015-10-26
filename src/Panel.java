@@ -19,10 +19,13 @@ public class Panel extends JPanel implements ActionListener {
 	private MapSheet map = new MapSheet();
 	private Point center = new Point(0, 0);
 	private ArrayList<Character> pressedKeys = new ArrayList<>();
+	private ArrayList<Objects> projectiles = new ArrayList<>();
 	private BufferedImage playerImage = sheet.getSoldier1();
+	private BufferedImage projectileImage = sheet.getProjectile();
 	private Player player = new Player((this.getWidth() / 2) - (playerImage.getWidth() / 2), (this.getHeight() / 2) - (playerImage.getHeight() / 2), playerImage.getHeight(), playerImage.getWidth(), playerImage, 10, 1);
-
-//	private Items item = new Items(0, 0, 0, 0, null, "test");
+	private double hScale;
+	private double wScale;
+	private lasers lasers = new lasers();
 
 	public Panel() {
 		this.setPreferredSize(new Dimension(1600, 900));
@@ -32,8 +35,6 @@ public class Panel extends JPanel implements ActionListener {
 
 	private void setUpBindings() {
 		//examples of keybindings
-		this.getInputMap().put(KeyStroke.getKeyStroke("SPACE"), "shoot");
-		this.getInputMap().put(KeyStroke.getKeyStroke("released SPACE"), "shootOff");
 		this.getInputMap().put(KeyStroke.getKeyStroke("W"), "Up");
 		this.getInputMap().put(KeyStroke.getKeyStroke("released W"), "UpOff");
 		this.getInputMap().put(KeyStroke.getKeyStroke("A"), "Left");
@@ -42,30 +43,6 @@ public class Panel extends JPanel implements ActionListener {
 		this.getInputMap().put(KeyStroke.getKeyStroke("released S"), "DownOff");
 		this.getInputMap().put(KeyStroke.getKeyStroke("D"), "Right");
 		this.getInputMap().put(KeyStroke.getKeyStroke("released D"), "RightOff");
-		this.getActionMap().put("shoot", new AbstractAction() {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (!pressedKeys.contains(new Character(' '))) pressedKeys.add(new Character(' '));
-//				System.out.println(item.getName());
-//				item.randomName();
-			}
-		});
-		this.getActionMap().put("shootOff", new AbstractAction() {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (pressedKeys.contains(new Character(' '))) pressedKeys.remove(new Character(' '));
-			}
-		});
 		this.getActionMap().put("Up", new AbstractAction() {
 			/**
 			 * 
@@ -173,6 +150,10 @@ public class Panel extends JPanel implements ActionListener {
 			return;
 		}
 		map.drawmap(0, 0, g, this.getWidth(), this.getHeight());
+		lasers.draw(g);
+//		for (Objects obj : projectiles) {
+//			obj.draw(g);
+//		}
 		player.draw(g);
 		//paint game stuff
 
@@ -204,6 +185,13 @@ public class Panel extends JPanel implements ActionListener {
 		if (pressedKeys.contains(new Character('A'))) left();
 		if (pressedKeys.contains(new Character('S'))) down();
 		if (pressedKeys.contains(new Character('D'))) right();
+		projectiles.retainAll(lasers.move(projectiles, this.getHeight(), this.getWidth()));
+//		for (Objects obj : projectiles) {
+//			obj.shoot();
+//			if (obj.getY() > this.getHeight() || obj.getX() > this.getWidth() || obj.getY() < 0 || obj.getX() < 0) trash.add(obj);
+//		}
+//		projectiles.removeAll(trash);
+//		trash.clear();
 	}
 
 	private void right() {
@@ -232,9 +220,21 @@ public class Panel extends JPanel implements ActionListener {
 	@Override
 	public void resize(Dimension d) {
 		// TODO Auto-generated method stub
+		hScale = getHeight() / 900.0;
+		wScale = getWidth() / 1600.0;
 		setPreferredSize(d);
 		repaint();
 		centerPlayer();
+		player.setH(hScale);
+		player.setW(wScale);
+	}
+
+	private void scaleObjects() {
+		// TODO Auto-generated method stub
+		for (Objects objects : projectiles) {
+			objects.setH(hScale);
+			objects.setW(wScale);
+		}
 	}
 
 	public void rotatePlayer() {
@@ -248,10 +248,19 @@ public class Panel extends JPanel implements ActionListener {
 		}
 	}
 
+	public void shoot() {
+		// TODO Auto-generated method stub
+		if (gameTimer.isRunning()) {
+			Objects projectile = new Objects((int) center.getX() - projectileImage.getWidth() / 2, (int) center.getY() - projectileImage.getHeight() / 2, projectileImage.getHeight(), projectileImage.getWidth(), projectileImage);
+			projectile.setRotation(player.getRotation());
+			projectile.setH(hScale);
+			projectile.setW(wScale);
+			projectiles.add(projectile);
+		}
+	}
+
 	private void centerPlayer() {
 		// TODO Auto-generated method stub
-		player.setH(((getHeight() / 900.0)));
-		player.setW(((getWidth() / 1600.0)));
 //		System.out.println(player.getH() + " " + player.getW());
 		center.setLocation(getWidth() / 2 - player.getW() / 2, getHeight() / 2 - player.getH() / 2);
 		player.move(center.getX(), center.getY());

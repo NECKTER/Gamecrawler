@@ -109,10 +109,6 @@ public class Objects {
 		return y;
 	}
 
-	public void shoot() {
-
-	}
-
 	public void destroy() {
 		destroyed = true;
 	}
@@ -184,6 +180,15 @@ public class Objects {
 		xform.scale(h, w);
 		AffineTransformOp op = new AffineTransformOp(xform, AffineTransformOp.TYPE_BILINEAR);
 		img = op.filter(original, null);
+	}
+
+	public void shoot() {
+		// TODO Auto-generated method stub
+		int x = 30;
+		double y = x * Math.tan(Math.toRadians(this.rotation));
+		if (!(rotation >= -90.0 && rotation <= 90.0)) x *= -1;
+		if ((rotation >= 90.0 && rotation <= 270.0)) y *= -1;
+		move(this.x + x, this.y + y);
 	}
 
 	private BufferedImage rotate(BufferedImage image, double _theta, int _thetaInDegrees) {

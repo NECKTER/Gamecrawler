@@ -76,4 +76,8 @@ public class SpriteSheet {
 	public BufferedImage getSoldier3() {
 		return soldier3;
 	}
+
+	public BufferedImage getProjectile() {
+		return projectile;
+	}
 }
