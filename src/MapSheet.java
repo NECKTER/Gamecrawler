@@ -13,7 +13,7 @@ public class MapSheet {
 	public MapSheet() {
 		try {
 
-			map01 = ImageIO.read(SpriteSheet.class.getResourceAsStream("images/Shivum.png"));
+			map01 = ImageIO.read(SpriteSheet.class.getResourceAsStream("images/Page 0.jpg"));
 		} catch (IOException e) {
 		}
 	}

@@ -20,6 +20,7 @@ public class SpriteSheet {
 	private BufferedImage squidcumming;
 	private BufferedImage robot;
 	private BufferedImage soldier3;
+	private BufferedImage projectile;
 
 	public SpriteSheet() {
 		try {
@@ -28,10 +29,11 @@ public class SpriteSheet {
 			page3 = ImageIO.read(SpriteSheet.class.getResourceAsStream("images/Page 2.jpg"));
 		} catch (IOException e) {
 		}
-		soldier1 = page1.getSubimage(177, 141, 387 - 177, 311 - 141);
+		soldier1 = page1.getSubimage(150, 130, 400 - 150, 330 - 130);
 		wormstraight = page1.getSubimage(225, 535, 235, 93);
 		wormmoving = page1.getSubimage(237, 700, 234, 93);
 		soldier2 = page1.getSubimage(616, 504, 257, 189);
+		projectile = page1.getSubimage(683, 800, 836 - 683, 860 - 800);
 		squidrest = page2.getSubimage(560, 75, 170, 120);
 		squidprecum = page2.getSubimage(514, 257, 217, 101);
 		squidcumming = page2.getSubimage(437, 433, 296, 93);
