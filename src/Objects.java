@@ -2,11 +2,14 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Objects {
 	public static Panel panel;
@@ -67,16 +70,39 @@ public class Objects {
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
 		if (!destroyed) {
+			Map<Color, ArrayList<Point>> colorMap = new HashMap<Color, ArrayList<Point>>();
+			ArrayList<Color> colorList = new ArrayList<>();
 			BufferedImage img = (BufferedImage) getImage();
 			for (int i = 0; i < img.getHeight(); i++) {
 				for (int j = 0; j < img.getWidth(); j++) {
 					if (!(backroundColors.contains(new Integer(img.getRGB(j, i)))) && img.getRGB(j, i) != 0) {
-						g.setColor(new Color(img.getRGB(j, i)));
-						g.drawLine(x + j - img.getWidth() / 2, y + i - img.getHeight() / 2, x + j - img.getWidth() / 2, y + i - img.getHeight() / 2);
+						Color temp = new Color(img.getRGB(j, i));
+						if (!colorList.contains(temp)) {
+							colorList.add(temp);
+						}
+						colorMap.putIfAbsent(temp, new ArrayList<Point>());
+						colorMap.get(temp).add(new Point(x + j - img.getWidth() / 2, y + i - img.getHeight() / 2));
 					}
 				}
 			}
+			for (Color color : colorList) {
+				g.setColor(color);
+				for (Point p : colorMap.get(color)) {
+					g.drawLine((int) p.getX(), (int) p.getY(), (int) p.getX(), (int) p.getY());
+				}
+			}
 		}
+//		if (!destroyed) {
+//			BufferedImage img = (BufferedImage) getImage();
+//			for (int i = 0; i < img.getHeight(); i++) {
+//				for (int j = 0; j < img.getWidth(); j++) {
+//					if (!(backroundColors.contains(new Integer(img.getRGB(j, i)))) && img.getRGB(j, i) != 0) {
+//						g.setColor(new Color(img.getRGB(j, i)));
+//						g.drawLine(x + j - img.getWidth() / 2, y + i - img.getHeight() / 2, x + j - img.getWidth() / 2, y + i - img.getHeight() / 2);
+//					}
+//				}
+//			}
+//		}
 	}
 
 	public void move(double x, double y) {

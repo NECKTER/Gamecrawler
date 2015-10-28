@@ -1,4 +1,5 @@
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class Items extends Objects {
 	private Scanner scanner;
 
 	public Items(int x, int y, int h, int w, Image img, String type) {
-		super(x, y, h, w, img);
+		super(x, y, h, w, (BufferedImage) img);
 		setupStats();
 		scan();
 		randomName();
