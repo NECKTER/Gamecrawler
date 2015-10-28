@@ -44,12 +44,26 @@ public class MapSheet {
 		ispressureY = false;
 		return ispressureY;
 	}
-	//public int[][] Putin(){
-	//int [][]Stage 1=new int {
-		
-//	}
-		
-//	}
+	public int[][] stageGenerator(){
+	int [][]Stage1=new int[20][20];
+		for(int i=0; i<19;i++){
+			for (int l=0;l<19;l++){
+				if(i==0 || i==19){
+					Stage1[i][l]=1;
+				}
+				else{
+					if(l==0 ||l==19){
+						Stage1[i][l]=1;
+					}
+					else{
+						Stage1[i][l]=0;
+					}
+				}
+			}
+		}
+
+		return Stage1;
+	}
 
 	public int getholderX() {
 		return xholder;
