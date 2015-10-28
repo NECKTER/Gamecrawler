@@ -7,20 +7,28 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 public class MapSheet {
-	private BufferedImage map01;
+	private BufferedImage Black;
 	public int xholder = 0, yholder = 0;
 	private boolean ispressureX = false, ispressureY = false;
 
 	public MapSheet() {
 		try {
 
-			map01 = ImageIO.read(SpriteSheet.class.getResourceAsStream("images/Page 0.jpg"));
+			Black = ImageIO.read(SpriteSheet.class.getResourceAsStream("images/black.png"));
 		} catch (IOException e) {
 		}
 	}
 
 	public void drawmap(int playerX, int playerY, Graphics g, int screenwidth, int screenheight) {
-		g.drawImage(map01, xholder, yholder, map01.getWidth(), map01.getHeight(), null);
+		g.drawImage(Black, xholder, yholder, Black.getWidth(), Black.getHeight(), null);
+		g.drawImage(Black, xholder, yholder+Black.getHeight(), Black.getWidth(), Black.getHeight(), null);
+		g.drawImage(Black, xholder, yholder-Black.getHeight(), Black.getWidth(), Black.getHeight(), null);
+		g.drawImage(Black, xholder+Black.getWidth(), yholder, Black.getWidth(), Black.getHeight(), null);
+		g.drawImage(Black, xholder-Black.getWidth(), yholder, Black.getWidth(), Black.getHeight(), null);
+		g.drawImage(Black, xholder-Black.getWidth(), yholder-Black.getHeight(), Black.getWidth(), Black.getHeight(), null);
+		g.drawImage(Black, xholder+Black.getWidth(), yholder-Black.getHeight(), Black.getWidth(), Black.getHeight(), null);
+		g.drawImage(Black, xholder+Black.getWidth(), yholder+Black.getHeight(), Black.getWidth(), Black.getHeight(), null);
+		g.drawImage(Black, xholder-Black.getWidth(), yholder+Black.getHeight(), Black.getWidth(), Black.getHeight(), null);
 	}
 
 	public boolean moveleft(int playermoveX) {

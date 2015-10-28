@@ -21,12 +21,14 @@ public class SpriteSheet {
 	private BufferedImage robot;
 	private BufferedImage soldier3;
 	private BufferedImage projectile;
+	
 
 	public SpriteSheet() {
 		try {
 			page1 = ImageIO.read(SpriteSheet.class.getResourceAsStream("images/Page 0.jpg"));
 			page2 = ImageIO.read(SpriteSheet.class.getResourceAsStream("images/Page 1.jpg"));
 			page3 = ImageIO.read(SpriteSheet.class.getResourceAsStream("images/Page 2.jpg"));
+			
 		} catch (IOException e) {
 		}
 		soldier1 = page1.getSubimage(150, 130, 400 - 150, 330 - 130);
@@ -80,4 +82,5 @@ public class SpriteSheet {
 	public BufferedImage getProjectile() {
 		return projectile;
 	}
+	
 }
