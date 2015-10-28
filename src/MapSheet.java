@@ -2,6 +2,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -42,6 +43,12 @@ public class MapSheet {
 		}
 		ispressureY = false;
 		return ispressureY;
+	}
+	public int[][] Putin(){
+	int [][]Stage 1=new int {
+		
+	}
+		
 	}
 
 	public int getholderX() {
