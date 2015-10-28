@@ -1,14 +1,23 @@
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-public class lasers extends Thread {
+public class Lasers extends Thread implements Runnable {
 	private ArrayList<Objects> projectiles = new ArrayList<>();
 	private ArrayList<Object> trash = new ArrayList<>();
+	private int h = 0, w = 0;
+	private Panel panel;
 
-	public ArrayList<Objects> move(ArrayList<Objects> objs, int h, int w) {
-		// TODO Auto-generated method stub
-		projectiles.clear();
+	public Lasers(ArrayList<Objects> objs, int h, int w, Panel panel) {
+		// TODO Auto-generated constructor stub
 		projectiles.addAll(objs);
+		this.h = h;
+		this.w = w;
+		this.panel = panel;
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
 		if (projectiles.size() > 0) {
 			for (Objects obj : projectiles) {
 				obj.shoot();
@@ -17,13 +26,7 @@ public class lasers extends Thread {
 			projectiles.removeAll(trash);
 			trash.clear();
 		}
-		return projectiles;
-	}
-
-	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
-		for (Objects obj : projectiles) {
-			obj.draw(g);
-		}
+		panel.setProjectiles(projectiles);
+		yield();
 	}
 }

@@ -22,7 +22,10 @@ public class Objects {
 	private boolean changeImg = true;
 	private boolean destroyed = false;
 	private static ArrayList<Integer> backroundColors = new ArrayList<>();
+	private double previousRotation = 0;
 	private double rotation = 0;
+	private double tangent = 0;
+	private int xDir = 1, yDir = 1;
 
 	public Objects(int x, int y, int h, int w, BufferedImage img3) {
 		this.h = h;
@@ -64,7 +67,7 @@ public class Objects {
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
 		if (!destroyed) {
-			BufferedImage img = rotate((BufferedImage) getImage(), Math.toRadians(rotation), (int) rotation);
+			BufferedImage img = (BufferedImage) getImage();
 			for (int i = 0; i < img.getHeight(); i++) {
 				for (int j = 0; j < img.getWidth(); j++) {
 					if (!(backroundColors.contains(new Integer(img.getRGB(j, i)))) && img.getRGB(j, i) != 0) {
@@ -76,22 +79,24 @@ public class Objects {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	public void move(double x, double y) {
 		// TODO Auto-generated method stub
 		this.x = (int) x;
 		this.y = (int) y;
-		myrect.move((int) ((int) x - w / 3), (int) y);
 	}
 
 	private Image getImage() {
 		// TODO Auto-generated method stub
+		if (previousRotation != rotation) {
+			this.img = rotate(original, Math.toRadians(rotation), (int) rotation);
+			previousRotation = rotation;
+		}
 		if (canAnimate) {
 			if (animation == 0) {
 				if (changeImg) {
 					animation++;
 				}
-				return original;
+				return this.img;
 			}
 			if (changeImg) {
 				animation--;
@@ -173,6 +178,9 @@ public class Objects {
 
 	public void setRotation(double angle) {
 		this.rotation = angle;
+		tangent = Math.tan(Math.toRadians(this.rotation));
+		if (!(rotation >= -90.0 && rotation <= 90.0)) xDir *= -1;
+		if ((rotation >= 90.0 && rotation <= 270.0)) yDir *= -1;
 	}
 
 	private void scale() {
@@ -185,10 +193,8 @@ public class Objects {
 	public void shoot() {
 		// TODO Auto-generated method stub
 		int x = 30;
-		double y = x * Math.tan(Math.toRadians(this.rotation));
-		if (!(rotation >= -90.0 && rotation <= 90.0)) x *= -1;
-		if ((rotation >= 90.0 && rotation <= 270.0)) y *= -1;
-		move(this.x + x, this.y + y);
+		double y = x * tangent;
+		move(this.x + x * xDir, this.y + y * yDir);
 	}
 
 	private BufferedImage rotate(BufferedImage image, double _theta, int _thetaInDegrees) {

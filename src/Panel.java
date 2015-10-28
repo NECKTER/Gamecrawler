@@ -20,12 +20,16 @@ public class Panel extends JPanel implements ActionListener {
 	private Point center = new Point(0, 0);
 	private ArrayList<Character> pressedKeys = new ArrayList<>();
 	private ArrayList<Objects> projectiles = new ArrayList<>();
+	private ArrayList<Object> trash = new ArrayList<>();
 	private BufferedImage playerImage = sheet.getSoldier1();
 	private BufferedImage projectileImage = sheet.getProjectile();
 	private Player player = new Player((this.getWidth() / 2) - (playerImage.getWidth() / 2), (this.getHeight() / 2) - (playerImage.getHeight() / 2), playerImage.getHeight(), playerImage.getWidth(), playerImage, 10, 1);
-	private double hScale;
-	private double wScale;
-	private lasers lasers = new lasers();
+	private double hScale = 1;
+	private double wScale = 1;
+	private Lasers laser;
+	private Marker marker;
+
+//	private lasers lasers = new lasers();
 
 	public Panel() {
 		this.setPreferredSize(new Dimension(1600, 900));
@@ -150,7 +154,12 @@ public class Panel extends JPanel implements ActionListener {
 			return;
 		}
 		map.drawmap(0, 0, g, this.getWidth(), this.getHeight());
-		lasers.draw(g);
+//		lasers.draw(g);
+		if (marker == null || !marker.isAlive()) {
+			Marker marker = new Marker(g, projectiles);
+			marker.start();
+			this.marker = marker;
+		}
 //		for (Objects obj : projectiles) {
 //			obj.draw(g);
 //		}
@@ -185,7 +194,12 @@ public class Panel extends JPanel implements ActionListener {
 		if (pressedKeys.contains(new Character('A'))) left();
 		if (pressedKeys.contains(new Character('S'))) down();
 		if (pressedKeys.contains(new Character('D'))) right();
-		projectiles.retainAll(lasers.move(projectiles, this.getHeight(), this.getWidth()));
+		if (laser == null || !laser.isAlive()) {
+			Lasers laser = new Lasers(projectiles, this.getHeight(), this.getWidth(), this);
+			laser.start();
+			this.laser = laser;
+		}
+
 //		for (Objects obj : projectiles) {
 //			obj.shoot();
 //			if (obj.getY() > this.getHeight() || obj.getX() > this.getWidth() || obj.getY() < 0 || obj.getX() < 0) trash.add(obj);
@@ -257,6 +271,10 @@ public class Panel extends JPanel implements ActionListener {
 			projectile.setW(wScale);
 			projectiles.add(projectile);
 		}
+	}
+
+	public void setProjectiles(ArrayList<Objects> projectiles) {
+		this.projectiles = projectiles;
 	}
 
 	private void centerPlayer() {

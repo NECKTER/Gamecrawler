@@ -18,6 +18,7 @@ import javax.swing.JMenuItem;
 
 public class Frame extends JFrame implements ActionListener {
 	Panel panel;
+	private long lastTurn = System.currentTimeMillis();
 
 	public Frame() {
 		super("Neon Shivam");
@@ -30,35 +31,35 @@ public class Frame extends JFrame implements ActionListener {
 		pack();
 		this.setVisible(true);
 		addMouseListener(new MouseListener() {
-			
+
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
 				panel.shoot();
 			}
-			
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 		addMouseMotionListener(new MouseMotionListener() {
@@ -66,13 +67,19 @@ public class Frame extends JFrame implements ActionListener {
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				// TODO Auto-generated method stub
-				panel.rotatePlayer();
+				if (System.currentTimeMillis() - lastTurn > 10) {
+					lastTurn = System.currentTimeMillis();
+					panel.rotatePlayer();
+				}
 			}
 
 			@Override
 			public void mouseDragged(MouseEvent e) {
 				// TODO Auto-generated method stub
-				panel.rotatePlayer();
+				if (System.currentTimeMillis() - lastTurn > 10) {
+					lastTurn = System.currentTimeMillis();
+					panel.rotatePlayer();
+				}
 			}
 		});
 		addComponentListener(new ComponentListener() {
