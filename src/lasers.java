@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Lasers extends Thread implements Runnable {
 	private ArrayList<Objects> projectiles = new ArrayList<>();
-	private ArrayList<Object> trash = new ArrayList<>();
+	private ArrayList<Objects> trash = new ArrayList<>();
 	private int h = 0, w = 0;
 	private Panel panel;
 
@@ -23,10 +23,8 @@ public class Lasers extends Thread implements Runnable {
 				obj.shoot();
 				if (obj.getY() > h || obj.getX() > w || obj.getY() < 0 || obj.getX() < 0) trash.add(obj);
 			}
-			projectiles.removeAll(trash);
-			trash.clear();
+			panel.removeProjectiles(trash);
 		}
-		panel.setProjectiles(projectiles);
 		yield();
 	}
 }

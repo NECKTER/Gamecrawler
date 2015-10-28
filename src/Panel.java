@@ -14,6 +14,8 @@ import javax.swing.Timer;
 
 public class Panel extends JPanel implements ActionListener {
 	private Timer gameTimer;
+	private long time = System.currentTimeMillis();
+	private double fps = 0;
 	private ClipPlayer sound = new ClipPlayer();
 	private SpriteSheet sheet = new SpriteSheet();
 	private MapSheet map = new MapSheet();
@@ -154,12 +156,12 @@ public class Panel extends JPanel implements ActionListener {
 			return;
 		}
 		map.drawmap(0, 0, g, this.getWidth(), this.getHeight());
-//		lasers.draw(g);
-		if (marker == null || !marker.isAlive()) {
+		if ((marker == null || !marker.isAlive()) && projectiles.size() > 0) {
 			Marker marker = new Marker(g, projectiles);
 			marker.start();
 			this.marker = marker;
-		}
+		} else
+			System.out.println("skiped draw");
 //		for (Objects obj : projectiles) {
 //			obj.draw(g);
 //		}
@@ -178,6 +180,9 @@ public class Panel extends JPanel implements ActionListener {
 	private void update() {
 		// TODO Auto-generated method stub
 		moveStuff();
+		fps = (1000 / (System.currentTimeMillis() - time));
+		time = System.currentTimeMillis();
+		setName(fps + "");
 	}
 
 	private void moveStuff() {
@@ -194,11 +199,12 @@ public class Panel extends JPanel implements ActionListener {
 		if (pressedKeys.contains(new Character('A'))) left();
 		if (pressedKeys.contains(new Character('S'))) down();
 		if (pressedKeys.contains(new Character('D'))) right();
-		if (laser == null || !laser.isAlive()) {
+		if ((laser == null || !laser.isAlive()) && projectiles.size() > 0) {
 			Lasers laser = new Lasers(projectiles, this.getHeight(), this.getWidth(), this);
 			laser.start();
 			this.laser = laser;
-		}
+		} else
+			System.out.println("skiped move");
 
 //		for (Objects obj : projectiles) {
 //			obj.shoot();
@@ -274,7 +280,13 @@ public class Panel extends JPanel implements ActionListener {
 	}
 
 	public void setProjectiles(ArrayList<Objects> projectiles) {
-		this.projectiles = projectiles;
+		this.projectiles.clear();
+		this.projectiles.addAll(projectiles);
+	}
+
+	public void removeProjectiles(ArrayList<Objects> projectiles) {
+		// TODO Auto-generated method stub
+		this.projectiles.removeAll(projectiles);
 	}
 
 	private void centerPlayer() {

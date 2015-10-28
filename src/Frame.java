@@ -59,7 +59,7 @@ public class Frame extends JFrame implements ActionListener {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-
+				
 			}
 		});
 		addMouseMotionListener(new MouseMotionListener() {
@@ -70,6 +70,7 @@ public class Frame extends JFrame implements ActionListener {
 				if (System.currentTimeMillis() - lastTurn > 10) {
 					lastTurn = System.currentTimeMillis();
 					panel.rotatePlayer();
+					setTitle(panel.getName());
 				}
 			}
 
