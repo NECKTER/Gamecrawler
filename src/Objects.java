@@ -72,7 +72,7 @@ public class Objects {
 		if (!destroyed) {
 			Map<Color, ArrayList<Point>> colorMap = new HashMap<Color, ArrayList<Point>>();
 			ArrayList<Color> colorList = new ArrayList<>();
-			BufferedImage img = (BufferedImage) getImage();
+			BufferedImage img = getImage();
 			for (int i = 0; i < img.getHeight(); i++) {
 				for (int j = 0; j < img.getWidth(); j++) {
 					if (!(backroundColors.contains(new Integer(img.getRGB(j, i)))) && img.getRGB(j, i) != 0) {
@@ -111,10 +111,10 @@ public class Objects {
 		this.y = (int) y;
 	}
 
-	private Image getImage() {
+	private BufferedImage getImage() {
 		// TODO Auto-generated method stub
 		if (previousRotation != rotation) {
-			this.img = rotate(original, Math.toRadians(rotation), (int) rotation);
+			this.img = rotate(scale(), Math.toRadians(rotation), (int) rotation);
 			previousRotation = rotation;
 		}
 		if (canAnimate) {
@@ -209,11 +209,12 @@ public class Objects {
 		if ((rotation >= 90.0 && rotation <= 270.0)) yDir *= -1;
 	}
 
-	private void scale() {
+	private BufferedImage scale() {
 		AffineTransform xform = new AffineTransform();
 		xform.scale(h, w);
 		AffineTransformOp op = new AffineTransformOp(xform, AffineTransformOp.TYPE_BILINEAR);
 		img = op.filter(original, null);
+		return img;
 	}
 
 	public void shoot() {
