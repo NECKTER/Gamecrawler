@@ -13,6 +13,10 @@ import javax.swing.KeyStroke;
 import javax.swing.Timer;
 
 public class Panel extends JPanel implements ActionListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Timer gameTimer;
 	private long time = System.currentTimeMillis();
 	private double fps = 0;
@@ -149,25 +153,23 @@ public class Panel extends JPanel implements ActionListener {
 
 	@Override
 	public void paint(Graphics g) {
-		super.paint(g);
 //		map.moveleft(100);
 		//paint what is to be seen then the game has not yet started or has ended
 		if (!gameTimer.isRunning()) {
 			return;
-		}
-		map.drawmap(0, 0, g, this.getWidth(), this.getHeight());
-		if ((marker == null || !marker.isAlive()) && projectiles.size() > 0) {
-			Marker marker = new Marker(g, projectiles);
-			marker.start();
-			this.marker = marker;
-		} else
-			System.out.println("skiped draw");
+		} else {
+			map.drawmap(0, 0, g, this.getWidth(), this.getHeight());
+			if ((marker == null || !marker.isAlive()) && projectiles.size() > 0) {
+				Marker marker = new Marker(g, projectiles);
+				marker.start();
+				this.marker = marker;
+			}
 //		for (Objects obj : projectiles) {
 //			obj.draw(g);
 //		}
-		player.draw(g);
-		//paint game stuff
-
+			player.draw(g);
+			//paint game stuff
+		}
 	}
 
 	@Override
@@ -203,8 +205,7 @@ public class Panel extends JPanel implements ActionListener {
 			Lasers laser = new Lasers(projectiles, this.getHeight(), this.getWidth(), this);
 			laser.start();
 			this.laser = laser;
-		} else
-			System.out.println("skiped move");
+		}
 
 //		for (Objects obj : projectiles) {
 //			obj.shoot();
@@ -271,7 +272,7 @@ public class Panel extends JPanel implements ActionListener {
 	public void shoot() {
 		// TODO Auto-generated method stub
 		if (gameTimer.isRunning()) {
-			Objects projectile = new Objects((int) center.getX() - projectileImage.getWidth() / 2, (int) center.getY() - projectileImage.getHeight() / 2, projectileImage.getHeight(), projectileImage.getWidth(), projectileImage);
+			Objects projectile = new Objects((int) center.x - projectileImage.getWidth() / 2, (int) center.y - projectileImage.getHeight() / 2, projectileImage.getHeight(), projectileImage.getWidth(), projectileImage);
 			projectile.setRotation(player.getRotation());
 			projectile.setH(hScale);
 			projectile.setW(wScale);
@@ -293,6 +294,6 @@ public class Panel extends JPanel implements ActionListener {
 		// TODO Auto-generated method stub
 //		System.out.println(player.getH() + " " + player.getW());
 		center.setLocation(getWidth() / 2 - player.getW() / 2, getHeight() / 2 - player.getH() / 2);
-		player.move(center.getX(), center.getY());
+		player.move(center.x, center.y);
 	}
 }

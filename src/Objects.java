@@ -88,7 +88,7 @@ public class Objects {
 			for (Color color : colorList) {
 				g.setColor(color);
 				for (Point p : colorMap.get(color)) {
-					g.drawLine((int) p.getX(), (int) p.getY(), (int) p.getX(), (int) p.getY());
+					g.drawLine((int) p.x, (int) p.y, (int) p.x, (int) p.y);
 				}
 			}
 		}
@@ -214,7 +214,7 @@ public class Objects {
 		xform.scale(h, w);
 		AffineTransformOp op = new AffineTransformOp(xform, AffineTransformOp.TYPE_BILINEAR);
 		img = op.filter(original, null);
-		return img;
+			return img;
 	}
 
 	public void shoot() {

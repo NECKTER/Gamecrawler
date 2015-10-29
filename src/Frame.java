@@ -17,11 +17,15 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 public class Frame extends JFrame implements ActionListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	Panel panel;
 	private long lastTurn = System.currentTimeMillis();
 
 	public Frame() {
-		super("Neon Shivam");
+		super("0");
 		setLayout(new BorderLayout());
 		createMenus();
 		setResizable(true);
@@ -59,7 +63,7 @@ public class Frame extends JFrame implements ActionListener {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 		addMouseMotionListener(new MouseMotionListener() {

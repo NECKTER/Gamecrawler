@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public class Marker extends Thread implements Runnable {
 	private ArrayList<Objects> projectiles = new ArrayList<>();
-	private Graphics g;
+	private static Graphics g;
 
 	public Marker(Graphics g, ArrayList<Objects> objs) {
 		// TODO Auto-generated constructor stub
-		this.g = g;
+		Marker.g = g;
 		projectiles.addAll(objs);
 	}
 
