@@ -14,19 +14,19 @@ import java.util.Map;
 public class Objects {
 	public static Panel panel;
 	private Rectangle myrect;
-	private int x, y;
-	private double w;
-	private double h;
+	protected int y = 0, x = 0;
+	private double w = 0;
+	private double h = 0;
 	private BufferedImage original;
-	private BufferedImage img;
+	protected BufferedImage img;
 	private BufferedImage img2;
 	private boolean canAnimate = false;
 	private int animation = 0;
 	private boolean changeImg = true;
-	private boolean destroyed = false;
-	private static ArrayList<Integer> backroundColors = new ArrayList<>();
-	private double previousRotation = 0;
-	private double rotation = 0;
+	protected boolean destroyed = false;
+	protected static ArrayList<Integer> backroundColors = new ArrayList<>();
+	protected double previousRotation = 0;
+	protected double rotation = 0;
 	private double tangent = 0;
 	private int xDir = 1, yDir = 1;
 
@@ -209,12 +209,12 @@ public class Objects {
 		if ((rotation >= 90.0 && rotation <= 270.0)) yDir *= -1;
 	}
 
-	private BufferedImage scale() {
+	protected BufferedImage scale() {
 		AffineTransform xform = new AffineTransform();
 		xform.scale(h, w);
 		AffineTransformOp op = new AffineTransformOp(xform, AffineTransformOp.TYPE_BILINEAR);
 		img = op.filter(original, null);
-			return img;
+		return img;
 	}
 
 	public void shoot() {
@@ -224,7 +224,7 @@ public class Objects {
 		move(this.x + x * xDir, this.y + y * yDir);
 	}
 
-	private BufferedImage rotate(BufferedImage image, double _theta, int _thetaInDegrees) {
+	protected static BufferedImage rotate(BufferedImage image, double _theta, int _thetaInDegrees) {
 
 		AffineTransform xform = new AffineTransform();
 

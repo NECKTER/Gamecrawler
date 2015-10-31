@@ -6,10 +6,10 @@ public class Marker extends Thread implements Runnable {
 	private ArrayList<Objects> projectiles = new ArrayList<>();
 	private static Graphics g;
 
-	public Marker(Graphics g, ArrayList<Objects> objs) {
+	public Marker(Graphics g, ArrayList<Projectiles> projectiles2) {
 		// TODO Auto-generated constructor stub
 		Marker.g = g;
-		projectiles.addAll(objs);
+		projectiles.addAll(projectiles2);
 	}
 
 	@Override
