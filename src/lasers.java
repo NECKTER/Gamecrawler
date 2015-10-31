@@ -7,9 +7,9 @@ public class Lasers extends Thread implements Runnable {
 	private static int h = 0, w = 0;
 	private static Panel panel;
 
-	public Lasers(ArrayList<Objects> objs, int h, int w, Panel panel) {
+	public Lasers(ArrayList<Projectiles> projectiles2, int h, int w, Panel panel) {
 		// TODO Auto-generated constructor stub
-		projectiles.addAll(objs);
+		projectiles.addAll(projectiles2);
 		Lasers.h = h;
 		Lasers.w = w;
 		Lasers.panel = panel;

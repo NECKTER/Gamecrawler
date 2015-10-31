@@ -10,6 +10,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.swing.AbstractAction;
 import javax.swing.JPanel;
@@ -29,7 +30,7 @@ public class Panel extends JPanel implements ActionListener {
 	private MapSheet map = new MapSheet();
 	private Point center = new Point(0, 0);
 	private ArrayList<Character> pressedKeys = new ArrayList<>();
-	private ArrayList<Objects> projectiles = new ArrayList<>();
+	private ArrayList<Projectiles> projectiles = new ArrayList<>();
 	private ArrayList<Object> trash = new ArrayList<>();
 	private BufferedImage playerImage = sheet.getSoldier1();
 	private BufferedImage projectileImage = sheet.getProjectile();
@@ -280,15 +281,14 @@ public class Panel extends JPanel implements ActionListener {
 	public void shoot() {
 		// TODO Auto-generated method stub
 		if (gameTimer.isRunning()) {
-			Objects projectile = new Objects((int) center.x - projectileImage.getWidth() / 2, (int) center.y - projectileImage.getHeight() / 2, projectileImage.getHeight(), projectileImage.getWidth(), projectileImage);
-			projectile.setRotation(player.getRotation());
+			Projectiles projectile = new Projectiles((int) center.x - projectileImage.getWidth() / 2, (int) center.y - projectileImage.getHeight() / 2, projectileImage.getHeight(), projectileImage.getWidth(), player.getRotation(), projectileImage);
 			projectile.setH(hScale);
 			projectile.setW(wScale);
 			projectiles.add(projectile);
 		}
 	}
 
-	public void setProjectiles(ArrayList<Objects> projectiles) {
+	public void setProjectiles(Collection<? extends Projectiles> projectiles) {
 		this.projectiles.clear();
 		this.projectiles.addAll(projectiles);
 	}
@@ -304,11 +304,17 @@ public class Panel extends JPanel implements ActionListener {
 		center.setLocation(getWidth() / 2 - player.getW() / 2, getHeight() / 2 - player.getH() / 2);
 		player.move(center.x, center.y);
 	}
+<<<<<<< HEAD
 	private BufferedImage scaleTitle() {
 		AffineTransform xform = new AffineTransform();
 		xform.scale(2, 2);
 		AffineTransformOp op = new AffineTransformOp(xform, AffineTransformOp.TYPE_BILINEAR);
 		titleafter = op.filter(sheet.gettitle(), null);
 			return titleafter;
+=======
+
+	public SpriteSheet getSheet() {
+		return sheet;
+>>>>>>> origin/master
 	}
 }
