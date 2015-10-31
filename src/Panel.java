@@ -1,9 +1,13 @@
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -34,7 +38,7 @@ public class Panel extends JPanel implements ActionListener {
 	private double wScale = 1;
 	private Lasers laser;
 	private Marker marker;
-
+    private BufferedImage titleafter;
 //	private lasers lasers = new lasers();
 
 	public Panel() {
@@ -153,9 +157,13 @@ public class Panel extends JPanel implements ActionListener {
 
 	@Override
 	public void paint(Graphics g) {
+		
+		
 //		map.moveleft(100);
 		//paint what is to be seen then the game has not yet started or has ended
 		if (!gameTimer.isRunning()) {
+			BufferedImage swag=this.scaleTitle();
+			g.drawImage(swag, 0, 0, null);
 			return;
 		} else {
 			map.drawmap(0, 0, g, this.getWidth(), this.getHeight());
@@ -295,5 +303,12 @@ public class Panel extends JPanel implements ActionListener {
 //		System.out.println(player.getH() + " " + player.getW());
 		center.setLocation(getWidth() / 2 - player.getW() / 2, getHeight() / 2 - player.getH() / 2);
 		player.move(center.x, center.y);
+	}
+	private BufferedImage scaleTitle() {
+		AffineTransform xform = new AffineTransform();
+		xform.scale(2, 2);
+		AffineTransformOp op = new AffineTransformOp(xform, AffineTransformOp.TYPE_BILINEAR);
+		titleafter = op.filter(sheet.gettitle(), null);
+			return titleafter;
 	}
 }

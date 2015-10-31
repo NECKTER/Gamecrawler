@@ -24,6 +24,7 @@ public class Objects {
 	private int animation = 0;
 	private boolean changeImg = true;
 	private boolean destroyed = false;
+	protected boolean solid;
 	private static ArrayList<Integer> backroundColors = new ArrayList<>();
 	private double previousRotation = 0;
 	private double rotation = 0;
