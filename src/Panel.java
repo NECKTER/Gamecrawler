@@ -17,6 +17,7 @@ public class Panel extends JPanel implements ActionListener {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static final boolean pressed = false;
 	private Timer gameTimer;
 	private long time = System.currentTimeMillis();
 	private double fps = 0;
@@ -32,9 +33,11 @@ public class Panel extends JPanel implements ActionListener {
 	private Player player = new Player((this.getWidth() / 2) - (playerImage.getWidth() / 2), (this.getHeight() / 2) - (playerImage.getHeight() / 2), playerImage.getHeight(), playerImage.getWidth(), playerImage, 10, 1);
 	private double hScale = 1;
 	private double wScale = 1;
+	private int vpX = 0, vpY = 0;
 	private Lasers laser;
 	private Marker marker;
-
+    private Graphics ge;
+    public int butX, butY;
 //	private lasers lasers = new lasers();
 
 	public Panel() {
@@ -149,32 +152,42 @@ public class Panel extends JPanel implements ActionListener {
 		// setup game then start timer
 		gameTimer.start();
 		centerPlayer();
+		butX = player.getX() - this.getWidth()/2 ;
+		butY = player.getY() - this.getHeight()/2 ;
 	}
 
 	@Override
 	public void paint(Graphics g) {
 //		map.moveleft(100);
+		//g.translate(1000, 0);
 		//paint what is to be seen then the game has not yet started or has ended
+		g.translate(butX, butY);
+		System.out.println(player.getX() + " "+ player.getY() + " Player");
+		System.out.println(butX + " " + butY+ " Map");
 		if (!gameTimer.isRunning()) {
+			
 			return;
 		} else {
+			
+			
+		
 			map.drawmap(0, 0, g, this.getWidth(), this.getHeight());
+			player.draw(g);
 			if ((marker == null || !marker.isAlive()) && projectiles.size() > 0) {
 				Marker marker = new Marker(g, projectiles);
 				marker.start();
 				this.marker = marker;
 			}
-//		for (Objects obj : projectiles) {
-//			obj.draw(g);
-//		}
-			player.draw(g);
-			//paint game stuff
+	
+			
+			
+	
 		}
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// do stuff and then repaint
+
 		update();
 		repaint();
 	}
@@ -217,25 +230,31 @@ public class Panel extends JPanel implements ActionListener {
 
 	private void right() {
 		// TODO Auto-generated method stub
-		map.moveleft(-1);
+	//	map.moveleft(-1);
+		player.move(player.getX() + 2, player.getY());
+		butX = butX -2;
 
 	}
 
 	private void down() {
 		// TODO Auto-generated method stub
-		map.moveup(-1);
-
+		//map.moveup(-1);
+		player.move(player.getX() , player.getY() + 2);
+		butY = butY - 2;
 	}
 
 	private void left() {
 		// TODO Auto-generated method stub
-		map.moveleft(1);
+		//map.moveleft(1);
+		player.move(player.getX() - 2, player.getY());
+		butX = butX +2;
 	}
 
 	private void up() {
 		// TODO Auto-generated method stub
-		map.moveup(1);
-
+		player.move(player.getX() , player.getY() - 2);
+		butY = butY + 2;
+		
 	}
 
 	@Override

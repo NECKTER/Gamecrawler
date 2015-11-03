@@ -223,6 +223,10 @@ public class Objects {
 		double y = x * tangent;
 		move(this.x + x * xDir, this.y + y * yDir);
 	}
+	public void stop(){
+		xDir = 0;
+		yDir = 0;
+	}
 
 	private BufferedImage rotate(BufferedImage image, double _theta, int _thetaInDegrees) {
 

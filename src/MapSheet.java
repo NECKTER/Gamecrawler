@@ -14,21 +14,14 @@ public class MapSheet {
 	public MapSheet() {
 		try {
 
-			Black = ImageIO.read(SpriteSheet.class.getResourceAsStream("images/black.png"));
+			Black = ImageIO.read(SpriteSheet.class.getResourceAsStream("images/Shivum.png"));
 		} catch (IOException e) {
 		}
 	}
 
 	public void drawmap(int playerX, int playerY, Graphics g, int screenwidth, int screenheight) {
 		g.drawImage(Black, xholder, yholder, Black.getWidth(), Black.getHeight(), null);
-		g.drawImage(Black, xholder, yholder+Black.getHeight(), Black.getWidth(), Black.getHeight(), null);
-		g.drawImage(Black, xholder, yholder-Black.getHeight(), Black.getWidth(), Black.getHeight(), null);
-		g.drawImage(Black, xholder+Black.getWidth(), yholder, Black.getWidth(), Black.getHeight(), null);
-		g.drawImage(Black, xholder-Black.getWidth(), yholder, Black.getWidth(), Black.getHeight(), null);
-		g.drawImage(Black, xholder-Black.getWidth(), yholder-Black.getHeight(), Black.getWidth(), Black.getHeight(), null);
-		g.drawImage(Black, xholder+Black.getWidth(), yholder-Black.getHeight(), Black.getWidth(), Black.getHeight(), null);
-		g.drawImage(Black, xholder+Black.getWidth(), yholder+Black.getHeight(), Black.getWidth(), Black.getHeight(), null);
-		g.drawImage(Black, xholder-Black.getWidth(), yholder+Black.getHeight(), Black.getWidth(), Black.getHeight(), null);
+
 	}
 
 	public boolean moveleft(int playermoveX) {

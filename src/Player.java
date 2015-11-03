@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -11,9 +12,12 @@ public class Player extends Objects {
 	private int corX, corY;
 	private int movespeed = 1;
 	private int moverequest;
+	private int viewportX = 1, viewportY = 1;
+	public BufferedImage b;
 
 	public Player(int x, int y, int h, int w, BufferedImage img, int health, int damage) {
 		super(x, y, h, w, img);
+		b = img;
 		health = this.health;
 
 		// TODO Auto-generated constructor stub
