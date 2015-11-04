@@ -30,8 +30,9 @@ public class Panel extends JPanel implements ActionListener {
 	private SpriteSheet sheet = new SpriteSheet();
 	private MapSheet map = new MapSheet();
 	private Point center = new Point(0, 0);
+	private ProjectileController manager = new ProjectileController();
 	private ArrayList<Character> pressedKeys = new ArrayList<>();
-	private ArrayList<Projectiles> projectiles = new ArrayList<>();
+	
 	private ArrayList<Object> trash = new ArrayList<>();
 	private BufferedImage playerImage = sheet.getSoldier1();
 	private BufferedImage projectileImage = sheet.getProjectile();
@@ -39,14 +40,13 @@ public class Panel extends JPanel implements ActionListener {
 	private double hScale = 1;
 	private double wScale = 1;
 	private int vpX = 0, vpY = 0;
-	private Lasers laser;
-	private Marker marker;
-<<<<<<< HEAD
+	
+
     private Graphics ge;
     public int butX, butY;
-=======
+
     private BufferedImage titleafter;
->>>>>>> origin/master
+
 //	private lasers lasers = new lasers();
 
 	public Panel() {
@@ -54,7 +54,7 @@ public class Panel extends JPanel implements ActionListener {
 		gameTimer = new Timer(1, this);
 		setUpBindings();
 	}
-
+	
 	private void setUpBindings() {
 		//examples of keybindings
 		this.getInputMap().put(KeyStroke.getKeyStroke("W"), "Up");
@@ -173,27 +173,22 @@ public class Panel extends JPanel implements ActionListener {
 		//g.translate(1000, 0);
 		//paint what is to be seen then the game has not yet started or has ended
 		g.translate(butX, butY);
-		System.out.println(player.getX() + " "+ player.getY() + " Player");
-		System.out.println(butX + " " + butY+ " Map");
+	//	System.out.println(player.getX() + " "+ player.getY() + " Player");
+	//	System.out.println(butX + " " + butY+ " Map");
 		if (!gameTimer.isRunning()) {
-<<<<<<< HEAD
-			
-=======
+
 			BufferedImage swag=this.scaleTitle();
 			g.drawImage(swag, 0, 0, null);
->>>>>>> origin/master
+
 			return;
 		} else {
 			
 			
 		
-			map.drawmap(0, 0, g, this.getWidth(), this.getHeight());
+			map.drawmap(0, 0, g, this.getWidth()  , this.getHeight() 
+					);
 			player.draw(g);
-			if ((marker == null || !marker.isAlive()) && projectiles.size() > 0) {
-				Marker marker = new Marker(g, projectiles);
-				marker.start();
-				this.marker = marker;
-			}
+		manager.render(g);
 	
 			
 			
@@ -206,6 +201,7 @@ public class Panel extends JPanel implements ActionListener {
 
 		update();
 		repaint();
+		
 	}
 
 	private void update() {
@@ -213,6 +209,8 @@ public class Panel extends JPanel implements ActionListener {
 		moveStuff();
 		fps = (1000 / (System.currentTimeMillis() - time));
 		time = System.currentTimeMillis();
+		manager.tick();
+	
 		setName(fps + "");
 	}
 
@@ -230,11 +228,7 @@ public class Panel extends JPanel implements ActionListener {
 		if (pressedKeys.contains(new Character('A'))) left();
 		if (pressedKeys.contains(new Character('S'))) down();
 		if (pressedKeys.contains(new Character('D'))) right();
-		if ((laser == null || !laser.isAlive()) && projectiles.size() > 0) {
-			Lasers laser = new Lasers(projectiles, this.getHeight(), this.getWidth(), this);
-			laser.start();
-			this.laser = laser;
-		}
+		if (pressedKeys.contains(new Character('T'))) shoot();
 
 //		for (Objects obj : projectiles) {
 //			obj.shoot();
@@ -285,13 +279,7 @@ public class Panel extends JPanel implements ActionListener {
 		player.setW(wScale);
 	}
 
-	private void scaleObjects() {
-		// TODO Auto-generated method stub
-		for (Objects objects : projectiles) {
-			objects.setH(hScale);
-			objects.setW(wScale);
-		}
-	}
+
 
 	public void rotatePlayer() {
 		// TODO Auto-generated method stub
@@ -306,23 +294,10 @@ public class Panel extends JPanel implements ActionListener {
 
 	public void shoot() {
 		// TODO Auto-generated method stub
-		if (gameTimer.isRunning()) {
-			Projectiles projectile = new Projectiles((int) center.x - projectileImage.getWidth() / 2, (int) center.y - projectileImage.getHeight() / 2, projectileImage.getHeight(), projectileImage.getWidth(), player.getRotation(), projectileImage);
-			projectile.setH(hScale);
-			projectile.setW(wScale);
-			projectiles.add(projectile);
-		}
+	//	System.out.print("fasdfasd");
+	manager.addBullet(new Projectile(player.getX(), player.getY(), sheet.getProjectile(), 0));
 	}
 
-	public void setProjectiles(Collection<? extends Projectiles> projectiles) {
-		this.projectiles.clear();
-		this.projectiles.addAll(projectiles);
-	}
-
-	public void removeProjectiles(ArrayList<Objects> projectiles) {
-		// TODO Auto-generated method stub
-		this.projectiles.removeAll(projectiles);
-	}
 
 	private void centerPlayer() {
 		// TODO Auto-generated method stub
@@ -330,17 +305,17 @@ public class Panel extends JPanel implements ActionListener {
 		center.setLocation(getWidth() / 2 - player.getW() / 2, getHeight() / 2 - player.getH() / 2);
 		player.move(center.x, center.y);
 	}
-<<<<<<< HEAD
+
 	private BufferedImage scaleTitle() {
 		AffineTransform xform = new AffineTransform();
 		xform.scale(2, 2);
 		AffineTransformOp op = new AffineTransformOp(xform, AffineTransformOp.TYPE_BILINEAR);
 		titleafter = op.filter(sheet.gettitle(), null);
 			return titleafter;
-=======
+	}
 
 	public SpriteSheet getSheet() {
 		return sheet;
->>>>>>> origin/master
+
 	}
 }

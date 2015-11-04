@@ -23,18 +23,13 @@ public class Objects {
 	private boolean canAnimate = false;
 	private int animation = 0;
 	private boolean changeImg = true;
-<<<<<<< HEAD
-	private boolean destroyed = false;
-	protected boolean solid;
-	private static ArrayList<Integer> backroundColors = new ArrayList<>();
-	private double previousRotation = 0;
-	private double rotation = 0;
-=======
+
+
 	protected boolean destroyed = false;
 	protected static ArrayList<Integer> backroundColors = new ArrayList<>();
 	protected double previousRotation = 0;
 	protected double rotation = 0;
->>>>>>> origin/master
+
 	private double tangent = 0;
 	private int xDir = 1, yDir = 1;
 
@@ -228,6 +223,7 @@ public class Objects {
 	public void shoot() {
 		// TODO Auto-generated method stub
 		int x = 30;
+		System.out.println("newm");
 		double y = x * tangent;
 		move(this.x + x * xDir, this.y + y * yDir);
 	}

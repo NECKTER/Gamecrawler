@@ -1,10 +1,24 @@
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-public class Projectile extends Objects {
+public class Projectile {
 
-	public Projectile(int x, int y, int h, int w, BufferedImage img3) {
-		super(x, y, h, w, img3);
-		// TODO Auto-generated constructor stub
+	private int x,y;
+	private BufferedImage p;
+	private double theta;
+	
+	public Projectile(int xx, int yy, BufferedImage c, double angle){
+		p = c;
+		x = xx;
+		y = yy;
+		theta = angle;
 	}
-
+	
+	public void tack(){
+		y = y + 2;
+	}
+	
+	public void Render(Graphics g){
+		g.drawImage(p, x, y, null);
+	}
 }
