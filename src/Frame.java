@@ -26,6 +26,7 @@ public class Frame extends JFrame implements ActionListener {
 
 	public Frame() {
 		super("0");
+		
 		setLayout(new BorderLayout());
 		createMenus();
 		setResizable(true);

@@ -14,6 +14,7 @@ public void tick(){
 	}
 public void render(Graphics g){
 	for(int t = 0; t < b.size(); t++){
+		
 		TempBullet = b.get(t);
 		
 		TempBullet.Render(g);

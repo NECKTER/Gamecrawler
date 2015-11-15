@@ -10,13 +10,13 @@ public class Player extends Objects {
 	private ArrayList<Items> items = new ArrayList<Items>();
 	private int isXbound = 1, isYbound = 1;
 	private int corX, corY;
-	private int movespeed = 1;
+	private int movespeed = 4;
 	private int moverequest;
 	private int viewportX = 1, viewportY = 1;
 	public BufferedImage b;
 
 	public Player(int x, int y, int h, int w, BufferedImage img, int health, int damage) {
-		super(x, y, h, w, img);
+		super(x, y, h, w, img, 100);
 		b = img;
 		health = this.health;
 
@@ -44,12 +44,11 @@ public class Player extends Objects {
 		return damage;
 	}
 
-	public void setHealth(int health) {
-		this.health = health;
-	}
+
 
 	public void setDamage(int damage) {
 		this.damage = damage;
+		
 	}
 
 	public void setArmor(int armor) {
@@ -94,5 +93,9 @@ public class Player extends Objects {
 	public int getRe() {
 		return moverequest;
 	}
+	public int getSpeed(){
+		return movespeed;
+	}
+	
 
 }

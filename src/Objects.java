@@ -23,7 +23,7 @@ public class Objects {
 	private boolean canAnimate = false;
 	private int animation = 0;
 	private boolean changeImg = true;
-
+	private int health;
 
 	protected boolean destroyed = false;
 	protected static ArrayList<Integer> backroundColors = new ArrayList<>();
@@ -33,7 +33,7 @@ public class Objects {
 	private double tangent = 0;
 	private int xDir = 1, yDir = 1;
 
-	public Objects(int x, int y, int h, int w, BufferedImage img3) {
+	public Objects(int x, int y, int h, int w, BufferedImage img3, int hp) {
 		this.h = h;
 		this.img = img3;
 		this.original = img3;
@@ -42,6 +42,9 @@ public class Objects {
 		this.y = y;
 		this.myrect = new Rectangle(x - w / 3, y, w * 2, h);
 		populateBackroundColors();
+	}
+	public void setHealth(int health) {
+		this.health = health;
 	}
 
 	private void populateBackroundColors() {
